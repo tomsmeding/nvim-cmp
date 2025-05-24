@@ -238,6 +238,11 @@ source.get_keyword_pattern = function(self)
   if self.source.get_keyword_pattern then
     local keyword_pattern = self.source:get_keyword_pattern(misc.copy(c))
     if keyword_pattern then
+      -- if self.source.get_debug_name then
+      --   print('source: ' .. self.source:get_debug_name() .. ' has keyword_pattern = ' .. keyword_pattern)
+      -- else
+      --   print('unknown source has keyword_pattern = ' .. keyword_pattern)
+      -- end
       return keyword_pattern
     end
   end

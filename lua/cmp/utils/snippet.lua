@@ -406,7 +406,7 @@ M.NodeType = Node.Type
 function M.parse(input)
   local result = S.snippet(input, 1)
   if not result.parsed then
-    error('snippet parsing failed.')
+    error('snippet parsing failed (' .. input .. ').')
   end
   return result.value
 end

@@ -182,7 +182,8 @@ entry._get_word = function(self)
   if completion_item.textEdit and not misc.empty(completion_item.textEdit.newText) then
     word = str.trim(completion_item.textEdit.newText)
     if completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-      word = tostring(snippet.parse(word))
+      status, parsed = pcall(snippet.parse, word)
+      if status then word = tostring(parsed) end
     end
     local overwrite = self:get_overwrite()
     if 0 < overwrite[2] or completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
@@ -191,7 +192,8 @@ entry._get_word = function(self)
   elseif not misc.empty(completion_item.insertText) then
     word = str.trim(completion_item.insertText)
     if completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-      word = str.get_word(tostring(snippet.parse(word)))
+      status, parsed = pcall(snippet.parse, word)
+      if status then word = str.get_word(tostring(parsed)) end
     end
   else
     word = str.trim(completion_item.label)
